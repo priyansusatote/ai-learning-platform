@@ -1,4 +1,4 @@
-package com.ai.education.platform.learning.goal.service;
+package com.ai.education.platform.learning.dailyplan.goal.service;
 
 import com.ai.education.platform.learning.enums.LearningLevel;
 import org.springframework.stereotype.Component;

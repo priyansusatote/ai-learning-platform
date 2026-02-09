@@ -1,6 +1,6 @@
-package com.ai.education.platform.learning.goal.service;
+package com.ai.education.platform.learning.dailyplan.goal.service;
 
-import com.ai.education.platform.learning.goal.dto.DailyPlanRequest;
+import com.ai.education.platform.learning.dailyplan.goal.dto.DailyPlanRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;

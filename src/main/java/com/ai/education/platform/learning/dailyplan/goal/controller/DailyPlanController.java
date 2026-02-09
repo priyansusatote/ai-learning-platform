@@ -1,8 +1,8 @@
-package com.ai.education.platform.learning.goal.controller;
+package com.ai.education.platform.learning.dailyplan.goal.controller;
 
-import com.ai.education.platform.learning.goal.dto.DailyPlanRequest;
-import com.ai.education.platform.learning.goal.dto.DailyPlanResponse;
-import com.ai.education.platform.learning.goal.service.DailyPlanService;
+import com.ai.education.platform.learning.dailyplan.goal.dto.DailyPlanRequest;
+import com.ai.education.platform.learning.dailyplan.goal.dto.DailyPlanResponse;
+import com.ai.education.platform.learning.dailyplan.goal.service.DailyPlanService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

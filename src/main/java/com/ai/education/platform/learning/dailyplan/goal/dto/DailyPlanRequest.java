@@ -1,4 +1,4 @@
-package com.ai.education.platform.learning.goal.dto;
+package com.ai.education.platform.learning.dailyplan.goal.dto;
 
 import com.ai.education.platform.learning.enums.LearningLevel;
 import jakarta.validation.constraints.Min;
