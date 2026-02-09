@@ -2,59 +2,73 @@ package com.ai.education.platform.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //Duplicate email, business rule failure
+    // ---------- AUTH / BUSINESS ----------
+
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<Map<String, String>> handleIllegalStateException(IllegalStateException ex) {
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(Map.of("error", ex.getMessage()));
+    public ResponseEntity<Map<String, String>> handleIllegalState(IllegalStateException ex) {
+        return error(HttpStatus.CONFLICT, ex.getMessage());
     }
 
-    //Wrong email/password
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<Map<String, String>> handleBadCredentialsException(BadCredentialsException ex) {
-
-        return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(Map.of("error", "Invalid email or password!"));
+    public ResponseEntity<Map<String, String>> handleBadCredentials() {
+        return error(HttpStatus.UNAUTHORIZED, "Invalid email or password");
     }
 
-    // Validation errors (@Valid)
+    // ---------- VALIDATION ----------
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationErrors(
+    public ResponseEntity<Map<String, String>> handleValidation(
             MethodArgumentNotValidException ex
     ) {
         Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(e -> errors.put(e.getField(), e.getDefaultMessage()));
 
-        ex.getBindingResult()
-                .getFieldErrors()
-                .forEach(error ->
-                        errors.put(error.getField(), error.getDefaultMessage())
-                );
-
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(errors);
+        return ResponseEntity.badRequest().body(errors);
     }
 
-    // Fallback (safety net)
+    // ---------- BAD REQUEST (INPUT ISSUES) ----------
+
+    @ExceptionHandler({
+            IllegalArgumentException.class,
+            MethodArgumentTypeMismatchException.class,
+            HttpMessageNotReadableException.class
+    })
+    public ResponseEntity<Map<String, String>> handleBadRequest(Exception ex) {
+        return error(HttpStatus.BAD_REQUEST, "Invalid request input");
+    }
+
+    // ---------- FALLBACK ----------
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleGeneric(
-            Exception ex
+    public ResponseEntity<Map<String, String>> handleGeneric(Exception ex) {
+        return error(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
+    }
+
+    // ---------- HELPER ----------
+
+    private ResponseEntity<Map<String, String>> error(
+            HttpStatus status,
+            String message
     ) {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("error", "Something went wrong"));
+        return ResponseEntity.status(status)
+                .body(Map.of("error", message));
     }
 }
+
