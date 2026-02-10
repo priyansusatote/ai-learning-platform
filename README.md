@@ -390,16 +390,17 @@ Frontend will start on: **http://localhost:5173**
 
 ## 📸 Screenshots
 
+### Login Page
+![Login](./screenshots/login.png)
+
 ### Dashboard
 ![Dashboard](./screenshots/dashboard.png)
 
 ### AI Roadmap Generator
 ![Roadmap](./screenshots/roadmap.png)
 
-### AI Intuition (Hints)
-![Hints](./screenshots/hints.png)
-
-> *Screenshots will be added here*
+### Practice Quiz
+![Quiz](./screenshots/quiz.png)
 
 ---
 
@@ -507,9 +508,8 @@ This project is licensed under the MIT License. See `LICENSE` file for details.
 **Priyansu Satote**  
 Backend-Focused Engineer | AI + Spring Boot Enthusiast
 
-- GitHub: [@yourusername](#)
-- LinkedIn: [Your LinkedIn](#)
-- Portfolio: [your-portfolio.com](#)
+- GitHub: [@priyansusatote](https://github.com/priyansusatote)
+- LinkedIn: [Priyansu Satote](https://www.linkedin.com/in/priyansu-satote-a185b0392/)
 
 ---
 
