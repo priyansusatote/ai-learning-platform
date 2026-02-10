@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GuidedAI - Learn by Thinking</title>
+    <script>
+      // Apply dark mode IMMEDIATELY to prevent flash of light mode
+      (function() {
+        const savedMode = localStorage.getItem('darkMode');
+        const isDark = savedMode ? JSON.parse(savedMode) : true; // default to dark
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
