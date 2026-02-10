@@ -23,6 +23,7 @@ public class SecurityConfig { //this class Defines Security Policy of our Entire
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(Customizer.withDefaults()) //allow front-end
                 //1:Disable CSRF (we are using JWT , not Cookies)
                 .csrf(AbstractHttpConfigurer::disable)
                 //2: disable Session (stateless Api)
